@@ -158,7 +158,7 @@ Ajout le `case`
 #endif //__CALENDAR
 ```
 
-## DBManaget.h
+## DBManager.h
 Dans `enum QUERYMODE` ajouter l'enum
 ```cpp
 #if defined(__CALENDAR)
@@ -189,7 +189,7 @@ Dans la fonction ___CDPTrans::CDPTrans()___
 	ON_MSG(PACKETTYPE_DB_CALENDAR_SUCCESS_DAY, &CDPTrans::OnCalendarSuccessDay);
 #endif //__CALENDAR
 ```
-Ajouter :
+Ajouter à la fin du fichier :
 ```cpp
 #if defined(__CALENDAR)
 void CDPTrans::OnCalendarSuccessDay(CAr& ar, DPID dpid, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize)
@@ -207,10 +207,14 @@ void CDPTrans::OnCalendarSuccessDay(CAr& ar, DPID dpid, DPID dpidCache, DPID dpi
 #if defined(__CALENDAR)
 #include "WndCalendar.hpp"
 #endif //
+```
+
 ```cpp
 #if defined(__CALENDAR)
 DECLAREAPPLET(AppMain_WndCalendar, new CWndCalendar);
 #endif //__CALENDAR
+```
+
 ```cpp
 #if defined(__CALENDAR)
     AddAppletFunc(AppMain_WndCalendar, APP_CALENDAR, _T("WndCalendar"), _T("Icon_Applet.dds"), "Calendar", 0);
