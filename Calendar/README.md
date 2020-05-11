@@ -51,8 +51,9 @@ Attention la valeur `2033` peut etre deja prise ! Remplacer la par une autre val
 ```
 ```cpp
 #if defined(__CALENDAR)
-#define PACKETYPE_GET_CALENDAR              (DWORD)0x98100603
-#define PACKETTYPE_DB_CALENDAR_SUCCESS_DAY  (DWORD)0x98100604
+#define SNAPSHOTTYPE_CALENDAR_INFORMATION  	 (WORD)0x8862
+#define SNAPSHOTTYPE_CALENDAR_SUCCESS_DAY  	 (WORD)0x8863
+#define SNAPSHOTTYPE_CALENDAR_SUCCESS_MONTH  	 (WORD)0x8864
 #endif //__CALENDAR
 ```
 
