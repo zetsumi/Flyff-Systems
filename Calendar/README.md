@@ -34,6 +34,22 @@ Executer les .sql dans MSSQL creer la table `CALENDAR_TBL`. <br>
 #define		__CALENDAR							//	Recompense Calendrier. Idea by @zeepone
 ```
 
+## Resdata.inc
+```cpp
+APP_CALENDAR "WndTile00.tga" 1 320 320 0x2410000 26
+{
+// Title String
+"Calendar"
+}
+{
+// ToolTip
+""
+}
+{
+
+}
+```
+
 ## Resdata.h
 ```cpp
 #if defined(__CALENDAR)
