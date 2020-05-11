@@ -22,8 +22,11 @@ Historique des mois precedent. <br>
 
 # Integration
 
+Deplacer le fichier `calendar.json` dans votre repertoire contenant `WorldServer.exe`. <br>
 Vous devez placer les fichier `WndCalendar.hpp` et `WndCalendar.cpp` dans `_Interface` puis ajouter les a votre solution `Neuz` via `VisualStudio`. <br>
+Vous devez placer les fichier `picojson.hpp` dans `_Common` puis ajouter les a votre solutions `Neuz` via `VisualStudio`. <br>
 Vous devez placer les fichier `Calendar.hpp` et `Calendar.cpp` dans `_Common` puis ajouter les a vos solutions `Neuz` et `WorldServer` via `VisualStudio`. <br>
+Vous devez placer les fichier `LexerParser.hpp` et `LexerParser.cpp` dans `_Common` puis ajouter les a vos solutions `Neuz` et `WorldServer` via `VisualStudio`. <br>
 Executer les .sql dans MSSQL creer la table `CALENDAR_TBL`. <br>
 
 ## VersionCommon.h
