@@ -321,14 +321,14 @@ void CDPDatabaseClient::OnGetCalendar(CAr& ar, DPID, DPID)
 	for (unsigned int m = 0; m < dwMonthNumber; ++m)
 	{
 		ar >> dwMonth;
-		if (pUser->m_mmAwardsCalendar.find(dwMonth) == pUser->m_mmAwardsCalendar.end())
-			pUser->m_mmAwardsCalendar[dwMonth] = std::map<unsigned int, bool>();
+		if (pUser->m_msAwardsCalendar.find(dwMonth) == pUser->m_msAwardsCalendar.end())
+			pUser->m_msAwardsCalendar[dwMonth] = std::set<unsigned int, bool>();
 
 		ar >> dwDayNumber;
 		for (unsigned int d = 0; d < dwDayNumber; ++d)
 		{
 			ar >> dwDay;
-			pUser->m_mmAwardsCalendar[dwMonth][dwDay] = true;
+			pUser->m_msAwardsCalendar[dwMonth].insert(dwDay);
 			pUser->SendCalendarDaySuccess(dwMonth, dwDay);
 		}
 	}
@@ -444,7 +444,7 @@ void CUser::SendCalendarMonthSuccess(unsigned int uMonth)
 Dans la class ___class CUser : public CMover___
 ```cpp
 #if defined(__CALENDAR)
-    std::map<unsigned int, std::map<unsigned int, bool>>    m_mmAwardsCalendar;
+    std::map<unsigned int, std::set<unsigned int>>    m_msAwardsCalendar;
 #endif //__CALENDAR
 ```
 ```cpp

@@ -3,7 +3,6 @@
 #if defined(__CALENDAR)
 #include "Calendar.hpp"
 #include "LexerParser.h"
-
 #if defined(__WORLDSERVER)
 #include "User.h"
 #include "DPDatabaseClient.h"
@@ -52,7 +51,7 @@ bool	CCalendar::Load()
 				ci.dwIDBonus = CScript::m_defines[szNameItemBonus];
 				ci.dwCountBonus = static_cast<unsigned int>(infos["count_bonus"].get<double>());
 			}
-			m_mAwards[szMonth].push_back(ci);
+			m_mAwards[szMonth].emplace_back(ci);
 
 		}
 
@@ -85,15 +84,15 @@ void CCalendar::ApplyAward(CUser* pUser)
 
 	bool bNeedGift = false;
 
-	if (pUser->m_mmAwardsCalendar.find(uMonth) == pUser->m_mmAwardsCalendar.end())
+	if (pUser->m_msAwardsCalendar.find(uMonth) == pUser->m_msAwardsCalendar.end())
 	{
 		bNeedGift = true;
-		pUser->m_mmAwardsCalendar[uMonth] = std::map<unsigned int, bool>();
+		pUser->m_msAwardsCalendar[uMonth] = std::set<unsigned int>();
 	}
 
-	if (pUser->m_mmAwardsCalendar[uMonth].find(ltm->tm_mday) == pUser->m_mmAwardsCalendar[uMonth].end())
+	if (pUser->m_msAwardsCalendar[uMonth].find(ltm->tm_mday) == pUser->m_msAwardsCalendar[uMonth].end())
 	{
-		pUser->m_mmAwardsCalendar[uMonth][ltm->tm_mday] = true;
+		pUser->m_msAwardsCalendar[uMonth].insert(ltm->tm_mday);
 		auto calendar = getCalenderFromMonth(uMonth);
 		auto item = calendar.at(ltm->tm_mday);
 		CItemElem itemElem;
@@ -105,7 +104,7 @@ void CCalendar::ApplyAward(CUser* pUser)
 		g_dpDBClient.SendCalendarDaySuccess(pUser->m_idPlayer, uMonth, ltm->tm_mday);
 		pUser->SendCalendarDaySuccess(uMonth, ltm->tm_mday);
 
-		unsigned int uDaySuccess = pUser->m_mmAwardsCalendar[uMonth].size();
+		unsigned int uDaySuccess = pUser->m_msAwardsCalendar[uMonth].size();
 		unsigned int uDayMonthTotal = getCalenderFromMonth(uMonth).size();
 		if (uDaySuccess == uDayMonthTotal)
 		{
@@ -135,7 +134,7 @@ void CCalendar::Add(DWORD dwID, DWORD dwCount)
 			MakePath(DIR_ITEM, pItemProp->szIcon),
 			0xffff00ff);
 	}
-	m_vAwards.push_back(ci);
+	m_vAwards.emplace_back(ci);
 }
 
 void	CCalendar::Clear(void)
