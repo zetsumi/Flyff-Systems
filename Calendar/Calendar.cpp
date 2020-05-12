@@ -34,7 +34,7 @@ bool	CCalendar::Load()
 		m_mAwards[szMonth] = std::vector<CalendarItem>();
 
 		picojson::object& oItems = month.second.get<picojson::object>();
-		for (unsigned int uDay = 1; uDay < 31; ++uDay)
+		for (unsigned int uDay = 1; uDay <= 31; ++uDay)
 		{
 			auto ito = oItems.find(std::to_string(uDay));
 			if (ito == oItems.end())
