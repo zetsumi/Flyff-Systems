@@ -109,10 +109,12 @@ void CCalendar::ApplyAward(CUser* pUser)
 		unsigned int uDayMonthTotal = getCalenderFromMonth(uMonth).size();
 		if (uDaySuccess == uDayMonthTotal)
 		{
-			CItemElem itemElem;
-			itemElem.m_dwItemId = item.dwID;
-			itemElem.m_nItemNum = item.dwCount;
-			itemElem.SetSerialNumber();
+			CItemElem itemElemBonus;
+			itemElemBonus.m_dwItemId = item.dwIDBonus;
+			itemElemBonus.m_nItemNum = item.dwCountBonus;
+			itemElemBonus.SetSerialNumber();
+			g_dpDBClient.SendQueryPostMail(pUser->m_idPlayer, 0, std::ref(itemElemBonus),
+				0, "calendar gift bonus", "nice !");
 		}
 	}
 }
