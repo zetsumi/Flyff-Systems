@@ -3,17 +3,17 @@
 Si vous lisez ce fichier au format `MD` utiliser le site web [dilliger](https://dillinger.io/) pour avoir la mise en page.
 
 Systeme réalisé dans le cadre d'une session de [live](https://www.twitch.tv/s4oul/).
-L'idee du systeme revient a ForEach !
-Vous avez des idées et vous souhaitez la voir réaliser venez la proposer sur le discord [AstralStudio](https://discord.gg/fZP7TWq).
+L'idee du système revient a [ForEach](https://github.com/ForEacho) !
+Vous avez une idée et vous souhaitez la voir réalisée venez la proposer sur le discord [AstralStudio](https://discord.gg/fZP7TWq).
 
 # ShopFavored
 
-`ShopFavored` permet d'ajouter un indiquateur sur les boutiques que l'on suit.<br>
+`ShopFavored` permet d'ajouter un indicateur sur les boutiques que l'on suit.<br>
 ![](VendorShopFavored.png)
 
 
 ## Amelioration
-Changer les icons donnée, malgré que je sois un grand picaso !<br>
+Changer les icones données, malgré que je sois un grand picaso !<br>
 
 
 # Integration
@@ -23,7 +23,7 @@ Ajouter les fichiers ***ShopFavo.hpp*** et ***ShopFavo.cpp*** dans le répertoir
 
 *** /!\ IMPORTANT /!\ ***
 Vous allez avoir besoin de la fonction de la fonction ***GetDlgItem<T>(UINT id)***.
-Crédit : [SquonK](https://github.com/SPSquonK)
+Crédit : [SquonK](https://gist.github.com/SPSquonK/59606a52ebec03204cf16e19665311c3)
 Dans le fichier ***WndBase.h*** chercher :
 ```cpp
 CWndBase* GetDlgItem(UINT nID);
@@ -43,7 +43,7 @@ Ajouter :
 
 ## VersionCommon.h
 ```cpp
-#define		__SHOP_FAVORED						//	Sauvergarder shopping prefere. Idea by @ForEach
+#define		__SHOP_FAVORED						//	Sauvegarder shopping prefere. Idea by @ForEach
 ```
 
 ## ResData.inc
@@ -357,10 +357,22 @@ IDS_RESDATA_INC_003821
 ```
 
 ## DialogMsg.h
-Dans la class ***CDialogMsg*** ajouter :
+En haut du fichier ajouter
+```cpp
+#include <array>
+```
+
+Dans la class ***CDialogMsg*** remplacer :
+```cpp
+    CTexture*                  m_pTex[3];
+```
+par
 ```cpp
 #if defined(__SHOP_FAVORED)
-	CTexture* m_pTexFavored[3];
+    std::array<CTexture*, 3> m_pTex;
+    std::array<CTexture*, 3> m_pTexFavored;
+#else
+    CTexture*                  m_pTex[3];
 #endif //__SHOP_FAVORED
 ```
 
@@ -393,12 +405,7 @@ Ajouter :
 ```cpp
 #if defined(__SHOP_FAVORED)
 			CMover* pMover = dynamic_cast<CMover*>(pObj);
-			bool bIsFavo = CShapFavo::GetInstance().Find(pMover->m_idPlayer);
-			CTexture* pTexShop[3] = {
-				bIsFavo == true ? m_pTexFavored[0] : m_pTex[0],
-				bIsFavo == true ? m_pTexFavored[1] : m_pTex[1],
-				bIsFavo == true ? m_pTexFavored[2] : m_pTex[2],
-			};
+            const std::array<CTexture*, 3> & pTexShop = CShapFavo::GetInstance().Find(pMover->m_idPlayer) ? m_pTexFavored : m_pTex;
 #endif //__SHOP_FAVORED
 
 ```
@@ -517,16 +524,10 @@ Remplacer la fonction par :
 ```cpp
 BOOL CWndVendor::Process()
 {
-	if (g_pPlayer->m_vtInfo.IsVendorOpen())
-	{
-        if (m_pBtnCancel != nullptr)
-		    m_pBtnCancel->SetVisible(FALSE);
-	}
-	else
-	{
-        if (m_pBtnCancel != nullptr)
-		    m_pBtnCancel->SetVisible(TRUE);
-	}
+    if (m_pBtnCancel != nullptr) {
+        m_pBtnCancel->SetVisible(g_pPlayer->m_vtInfo.IsVendorOpen() ? FALSE : TRUE);
+    }
+
 	return TRUE;
 }
 ```
