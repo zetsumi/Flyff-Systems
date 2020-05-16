@@ -2,10 +2,9 @@
 
 Si vous lisez ce fichier au format `MD` utiliser le site web [dilliger](https://dillinger.io/) pour avoir la mise en page.
 
-Systeme realiser dans le cadre d'une session de [live](https://www.twitch.tv/s4oul/).
+Systeme réalisé dans le cadre d'une session de [live](https://www.twitch.tv/s4oul/).
 L'idee du systeme revient a Zeepone !
-Vous avez des idees et vous souhaitez la voir realiser venez la proposer sur le discord [AstralStudio](https://discord.gg/fZP7TWq
-).
+Vous avez des idées et vous souhaitez la voir réaliser venez la proposer sur le discord [AstralStudio](https://discord.gg/fZP7TWq).
 
 # Calendrier
 
