@@ -17,13 +17,10 @@ void CShapFavo::Add(unsigned int id)
 
 void CShapFavo::Remove(unsigned int id)
 {
-	auto itID = std::find(m_vShop.begin(), m_vShop.end(), id);
-	if (itID == m_vShop.end())
-		return;
-	m_vShop.erase(itID);
+	m_vShop.erase(std::remove(m_vShop.begin(), m_vShop.end(), id), m_vShop.end());
 }
 
-bool CShapFavo::Find(unsigned int id)
+bool CShapFavo::Find(unsigned int id) const
 {
 	return std::find(m_vShop.begin(), m_vShop.end(), id) != m_vShop.end();
 }
