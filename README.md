@@ -20,4 +20,4 @@ Idea by Zeepone.
 ## Shop Favored
 Idea by ForEach.<br>
 `ShopFavored` permet de suivre une boutique. Indiquateur visuel.
-![](ShopFavored/VendorShopFavored.PNG)
+![](ShopFavored/VendorShopFavored.png)
