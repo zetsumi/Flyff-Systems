@@ -12,9 +12,9 @@ Suivez le live [ici](https://www.twitch.tv/s4oul/). <br>
 
 
 ## Calendar
-`Calendar` recuperation de bonus quotidien.
+`Calendar` recuperation de bonus quotidien. <br>
 ![](Calendar/calendar.PNG)
 
 ## Shop Favored
-`ShopFavored` permet de suivre une boutique. Indiquateur visuel.
-![](ShopFavored/VendorShopFavored.PNG)
+`ShopFavored` permet de suivre une boutique. Indiquateur visuel.<br>
+![](ShopFavored/VendorShopFavored.png)
