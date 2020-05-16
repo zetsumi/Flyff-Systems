@@ -8,16 +8,8 @@ Vous avez des idées et vous souhaitez la voir réaliser venez la proposer sur l
 
 # ShopFavored
 
-`ShopFavored` permet d'ajouter un indiquateur sur les boutiques que l'on suit.
-![](VendorShopFavored.PNG)
-
-Par défaut les indiquateurs d'une boutique sont :
-![](texDialogBox_left.PNG)
-![](texDialogBox_right.PNG)
-
-Lors que vous suivez une boutique les indiquateurs seront :
-![](texDialogBox_left_favored.PNG)
-![](texDialogBox_right_favored.PNG)
+`ShopFavored` permet d'ajouter un indiquateur sur les boutiques que l'on suit.<br>
+![](VendorShopFavored.png)
 
 
 ## Amelioration
