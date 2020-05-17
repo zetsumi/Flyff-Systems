@@ -12,7 +12,8 @@ Le code source et l'application elle-même sont destinés à être utilisés en 
 
 # Systêmes
 Tous les systêmes réalisé ont été fait via `Visual Studio 2019`.<br>
-La version minimun de C++ >= `11`, la version `14` est recommandée.
+La version minimun de C++ >= `11`, la version `14` est recommandée.<br>
+La version de ***Fly For Fun*** est la ***V15***.<br>
 
 ## AwakeCustom
 Idea by Zeepone.
