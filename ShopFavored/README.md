@@ -364,13 +364,13 @@ En haut du fichier ajouter
 
 Dans la class ***CDialogMsg*** remplacer :
 ```cpp
-    CTexture*                  m_pTex[3];
-```
+    CTexture*                  m_pTex[3];```
 par
 ```cpp
 #if defined(__SHOP_FAVORED)
     std::array<CTexture*, 3> m_pTex;
     std::array<CTexture*, 3> m_pTexFavored;
+    std::array<CTexture*, 3> m_pTexVIP;
 #else
     CTexture*                  m_pTex[3];
 #endif //__SHOP_FAVORED
@@ -393,6 +393,11 @@ Ajouter :
 	m_pTexFavored[0] = CWndBase::m_textureMng.AddTexture(g_Neuz.m_pd3dDevice, MakePath(DIR_THEME, "texDialogBox_left_favored.tga"), 0xffff00ff);
 	m_pTexFavored[1] = CWndBase::m_textureMng.AddTexture(g_Neuz.m_pd3dDevice, MakePath(DIR_THEME, "texDialogBox_center.TGA"), 0xffff00ff);
 	m_pTexFavored[2] = CWndBase::m_textureMng.AddTexture(g_Neuz.m_pd3dDevice, MakePath(DIR_THEME, "texDialogBox_right_favored.tga"), 0xffff00ff);
+#ifdef __VIP
+    m_pTexVIP[0] = CWndBase::m_textureMng.AddTexture(g_Neuz.m_pd3dDevice, MakePath(DIR_THEME, "texDialogBox_left_VIP.png"), 0xffff00ff);
+    m_pTexVIP[1] = CWndBase::m_textureMng.AddTexture(g_Neuz.m_pd3dDevice, MakePath(DIR_THEME, "texDialogBox_center_VIP.png"), 0xffff00ff);
+    m_pTexVIP[2] = CWndBase::m_textureMng.AddTexture(g_Neuz.m_pd3dDevice, MakePath(DIR_THEME, "texDialogBox_right_VIP.png"), 0xffff00ff);
+#endif //__VIP
 ```
 
 Dans la fonction ___void CDialogMsg::Render(C2DRender * p2DRender)___
@@ -404,10 +409,18 @@ Chercher :
 Ajouter :
 ```cpp
 #if defined(__SHOP_FAVORED)
-			CMover* pMover = dynamic_cast<CMover*>(pObj);
-            const std::array<CTexture*, 3> & pTexShop = CShapFavo::GetInstance().Find(pMover->m_idPlayer) ? m_pTexFavored : m_pTex;
-#endif //__SHOP_FAVORED
+            CMover* pMover = dynamic_cast<CMover*>(pObj);
+            std::array<CTexture*, 3> pTexShop;
+#ifdef __VIP
+            if (pMover->IsVip())
+                pTexShop = CShapFavo::GetInstance().Find(pMover->m_idPlayer) ? m_pTexVIP : m_pTex;
+            else
+                pTexShop = CShapFavo::GetInstance().Find(pMover->m_idPlayer) ? m_pTexFavored : m_pTex;
+#else //__VIP
+           pTexShop = CShapFavo::GetInstance().Find(pMover->m_idPlayer) ? m_pTexFavored : m_pTex;
+#endif //__VIP
 
+#endif //__SHOP_FAVORED
 ```
 Remplacer :
 ```cpp
