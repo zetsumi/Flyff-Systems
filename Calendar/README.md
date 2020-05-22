@@ -453,3 +453,13 @@ Dans la class ___class CUser : public CMover___
     void    SendCalendarMonthSuccess(unsigned int uMonth);
 #endif //__CALENDAR
 ```
+
+## DbManagerjoin.cpp
+A la fin de la fonction ___CDbManager::Join___.
+```cpp
+	g_dpCoreSrvr.SendMemberTime( mover.m_idPlayer, szTimeGuild );
+#if defined(__CALENDAR)
+	SendCalendar(qry, &mover, lpDBOP);
+#endif //__CALENDAR
+	FreeRequest(lpDBOP);
+```
