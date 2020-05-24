@@ -428,7 +428,7 @@ p2DRender->RenderTexture(ptTex1, m_pTex[0], nAlpha, 1.0f, 1.0f);
 ```
 Par :
 ```cpp
-if defined(__SHOP_FAVORED)
+#if defined(__SHOP_FAVORED)
 			p2DRender->RenderTexture(ptTex1, pTexShop[0], nAlpha, 1.0f, 1.0f);
 #else
             p2DRender->RenderTexture(ptTex1, m_pTex[0], nAlpha, 1.0f, 1.0f);
