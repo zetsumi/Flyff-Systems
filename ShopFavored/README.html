@@ -379,7 +379,7 @@ Chercher :</p>
 <pre><code class="has-line-data" data-line-start="413" data-line-end="415" class="language-cpp">p2DRender-&gt;RenderTexture(ptTex1, m_pTex[<span class="hljs-number">0</span>], nAlpha, <span class="hljs-number">1.0f</span>, <span class="hljs-number">1.0f</span>);
 </code></pre>
 <p class="has-line-data" data-line-start="415" data-line-end="416">Par :</p>
-<pre><code class="has-line-data" data-line-start="417" data-line-end="423" class="language-cpp">if defined(__SHOP_FAVORED)
+<pre><code class="has-line-data" data-line-start="417" data-line-end="423" class="language-cpp">#if defined(__SHOP_FAVORED)
             p2DRender-&gt;RenderTexture(ptTex1, pTexShop[0], nAlpha, 1.0f, 1.0f);
 #else
             p2DRender-&gt;RenderTexture(ptTex1, m_pTex[0], nAlpha, 1.0f, 1.0f);
