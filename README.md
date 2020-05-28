@@ -12,6 +12,9 @@ Le code source et l'application elle-même sont destinés à être utilisés en 
 ![](https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc-sa.svg)
 
 
+# Utils
+Vous trouverez un ensemble de fonction ou fixe necessaire pour utiliser les systemes presents.<br>
+
 # Systêmes
 Tous les systêmes réalisé ont été fait via `Visual Studio 2019`.<br>
 La version minimun de C++ >= `11`, la version `14` est recommandée.<br>
@@ -41,3 +44,6 @@ Idea by ForEach.<br>
 Le system s'appuie sur la commande `/level`.<br>
 ![](AdminChangeLevel/AdminChangeLevel.png)
 
+## Choix de la difficulte dans les donjon
+`DifficultyInstance` permet de choisir une difficulte dans les donjons.<br>
+![](https://img.icons8.com/color/24/000000/error.png) La premier version presente de nombreux bugs ! ![](https://img.icons8.com/color/24/000000/error.png).<br>
