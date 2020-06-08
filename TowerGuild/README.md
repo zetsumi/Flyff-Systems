@@ -22,6 +22,18 @@ Vous devez placer les fichier `TowerGuild.h` et `TowerGuild.cpp` dans `_Common_`
 Placer les dossier `towerguild` dans vos ressource/client. Les chemins sont configurables.<br>
 Par defaut 3 etages sont configurer, les etages se passer dans `WI_WORLD_MADRIGAL` il est fortement conseil de creer de nouvelles maps !.<br>
 
+# Base de donnee
+Ajouter la colonne ***uTowerGuildId*** en BigInt a ***GUILD_STR***.<br>
+La procedure stockee ***GULD_STR*** ***S1*** doit aussi retourner ***uTowerGuildId***.<br>
+```sql
+IF @iGu = 'S1'
+	BEGIN
+		SELECT  m_idGuild,serverindex,Lv_1,Lv_2,Lv_3,Lv_4,Pay_0,Pay_1,Pay_2,Pay_3,Pay_4,m_szGuild,m_nLevel,
+						m_nGuildGold,m_nGuildPxp,m_nWin,m_nLose,m_nSurrender,m_nWinPoint,
+						m_dwLogo,m_szNotice,
+						uTowerGuildId
+```
+
 # Sources
 
 ## VersinCommon
