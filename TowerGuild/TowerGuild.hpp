@@ -2,7 +2,7 @@
 
 #if defined(__TOWER_GUILD)
 
-#define	TOWER_GUILD_CONFIG_FILE	"towerguild/tower_guild.json"
+#define	TOWER_GUILD_CONFIG_FILE	"config_towerguild/tower_guild.json"
 
 struct TWAward
 {
