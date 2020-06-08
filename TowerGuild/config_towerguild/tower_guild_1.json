@@ -1,0 +1,100 @@
+{
+  "1": {
+    "world": {
+      "id": "WI_WORLD_MADRIGAL",
+      "position": {
+        "x": 6796,
+        "y": 108,
+        "z": 3359
+      }
+    },
+    "state": {
+      "0": {
+        "wave": [
+          {
+            "id": "MI_AIBATT1",
+            "count": 10,
+            "position": {
+              "x": 6796,
+              "y": 108,
+              "z": 3359
+            }
+          },
+          {
+            "id": "MI_AIBATT2",
+            "count": 20,
+            "position": {
+              "x": 6796,
+              "y": 108,
+              "z": 3359
+            }
+          }
+        ],
+        "boss": [
+          {
+            "id": "MI_PUKEPUKE1",
+            "position": {
+              "x": 6796,
+              "y": 108,
+              "z": 3359
+            }
+          },
+          {
+            "id": "MI_FEFERN1",
+            "position": {
+              "x": 6796,
+              "y": 108,
+              "z": 3359
+            }
+          }
+        ]
+      },
+      "1": {
+        "wave": [
+          {
+            "id": "MI_DORIDOMA1",
+            "count": 10,
+            "position": {
+              "x": 6796,
+              "y": 108,
+              "z": 3359
+            }
+          },
+          {
+            "id": "MI_NYANGNYANG1",
+            "count": 20,
+            "position": {
+              "x": 6796,
+              "y": 108,
+              "z": 3359
+            }
+          }
+        ],
+        "boss": [
+          {
+            "id": "MI_VOLT1",
+            "position": {
+              "x": 6796,
+              "y": 108,
+              "z": 3359
+            }
+          },
+          {
+            "id": "MI_WATANGKA2",
+            "position": {
+              "x": 6796,
+              "y": 108,
+              "z": 3359
+            }
+          }
+        ]
+      }
+    },
+    "awards": [
+      {
+        "id": "II_WEA_AXE_RODNEY",
+        "count": 1
+      }
+    ]
+  }
+}

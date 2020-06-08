@@ -47,3 +47,12 @@ Le system s'appuie sur la commande `/level`.<br>
 ## Choix de la difficulte dans les donjon
 `DifficultyInstance` permet de choisir une difficulte dans les donjons.<br>
 ![](https://img.icons8.com/color/24/000000/error.png) La premier version presente de nombreux bugs ! ![](https://img.icons8.com/color/24/000000/error.png).<br>
+
+
+# TowerGuild
+Realisation d'un defie pour les guildes.<br>
+Le principe est de finir passer les etages afin de recuperer des recompenses.<br>
+Les etages sont configurer un/des fichiers de configuration.<br>
+Les joueurs utilisent les commandes `entertg` ou `etg` afin de rentrer dans la TowerGuild.<br>
+Les joueurs utilisent les commandes `quittg` ou `qtg` afin de sortir dans la TowerGuild.<br>
+![](TowerGuild/tower_guild.png)
