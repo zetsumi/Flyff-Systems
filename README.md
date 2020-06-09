@@ -4,7 +4,7 @@ Regroupement des systemes realiser en live avec le chat ! <br>
 Venez proposer vos idee [ici](https://discord.gg/fZP7TWq). <br>
 Suivez le live [ici](https://www.twitch.tv/s4oul/). <br>
 
-/!\ Ce projet n'est pas affilié avec ***Gala Lab*** /!\
+![](https://img.icons8.com/color/24/000000/error.png).<br> Ce projet n'est pas affilié avec ***Gala Lab*** ![](https://img.icons8.com/color/24/000000/error.png).<br>
 
 ## ![](https://img.icons8.com/color/24/000000/creative-commons--v1.png) License
 Le code source et l'application elle-même sont destinés à être utilisés en fonction de la pièce jointe.<br>
@@ -31,7 +31,7 @@ Idea by ForEach.<br>
 
 ## Calendar
 Idea by Zeepone.<br>
-`Calendar` recuperation de bonus quotidien.
+`Calendar` recuperation de bonus quotidien.<br>
 ![](Calendar/calendar.PNG)
 
 ## Shop Favored
