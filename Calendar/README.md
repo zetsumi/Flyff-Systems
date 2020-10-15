@@ -304,6 +304,13 @@ Dans la class ___class CDPClient : public CDPMng___
 #include "Calendar.hpp"
 #endif //__CALENDAR
 ```
+Dans la fonction ___CDPDatabaseClient::CDPDatabaseClient()___
+```cpp
+#if defined(__CALENDAR)
+    ON_MSG(PACKETYPE_GET_CALENDAR, &CDPDatabaseClient::OnGetCalendar);
+#endif //__CALENDAR
+```
+
 ```cpp
 #if defined(__CALENDAR)
 void CDPDatabaseClient::OnGetCalendar(CAr& ar, DPID, DPID)
