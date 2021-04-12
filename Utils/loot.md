@@ -1,6 +1,6 @@
-# Flyff et les drops !
+# FlyFF et les drops !
 
-Beaucoup de personne se plaignent des drops sur flyff !<br>
+Beaucoup de personne se plaignent des drops sur FlyFF !<br>
 Mais qu'elle en est la cause ?<br>
 
 Il y existe deux points importants pouvant créer des problème d'équilibrage sur le drop.<br>
@@ -9,14 +9,14 @@ Nous allons détailler ces points et proposer une solutions.
 ## Comment fonctionne le système
 
 Tout d'abord un petit point sur le fonctionnement du système `DropItem`.<br>
-Les propriété de DropItem() sont stocké dans `m_dropItems` de l'objet `CDropItemGenerator`.<br>
+Les propriété de DropItem() sont stockées dans `m_dropItems` de l'objet `CDropItemGenerator`.<br>
 La variable `m_dropItems` est un `std::vector<DROPITEM>`.<br>
 
-Maintenant que nous savons ou les informations sont enregistrées regardons comme le drop est sélectionné.<br>
+Maintenant que nous savons où les informations sont enregistrées regardons comme le drop est sélectionné.<br>
 Dans le fichier `Mover.cpp` il y a la fonction `BOOL CMover::DropItem(CMover* pAttacker)`.<br>
-C'est donc cette derniere qui effectue les différent type de drop, dans notre cas nous nous interessons uniquement au `DropItem` donc
+C'est donc cette derniere qui effectue les différents types de drop, dans notre cas nous nous interessons uniquement au `DropItem` donc
 à la variable `m_DropItemGenerator`.<br>
-Plus dans la fonction nous pouvons voir :
+Plus loin dans la fonction nous pouvons voir :
 ```cpp
 FLOAT fItemDropRate = nProbability * GetItemDropRateFactor(pAttacker);
 if (xRandom(100) < fItemDropRate)
@@ -35,7 +35,7 @@ if (xRandom(100) < fItemDropRate)
 }
 ```
 
-C'est donc ici que l'on va sélectionne l'item à faire drop.<br>
+C'est donc ici que l'on va sélectionner l'item à faire drop.<br>
 Dans mon cas la fonction `DROPITEM* CDropItemGenerator::GetAt`
  indique qu'elle a besoin d'un variable `bUniqueMode` mais ne l'utilise pas !<br>
 Si on regarde en détail la fonction voici comme sélectionne un item.<br>
@@ -88,10 +88,10 @@ Imaginons qu'un item à une proba de `3000000` et notre chance est de `4000000` 
 
 ## Un pourcentage pas répartie sur 100 %
 
-Il y existe des personnes qui ne font pas attention à se qu'il configure et le code source ne vérifie pas pour vous ! (pas de chance).<br>
-Il faut faire attention que la somme de vaut `DropItem` ne dépasse pas `3000000000`.<br>
+Il y existe des personnes qui ne font pas attention à ce qu'elles configurent et le code source ne vérifie pas pour vous ! (pas de chance).<br>
+Il faut faire attention que la somme de `DropItem` ne dépasse pas `3000000000`.<br>
 Si on dépasse `3000000000` on a plus 100 part à partagé !<br>
-Il est aussi recommendé de mettre la plus grand probabilité à la fin de la liste plutôt qu'au début.<br>
+Il est aussi recommandé de mettre la plus grande probabilité à la fin de la liste plutôt qu'au début.<br>
 <br>
 Dans le cas ou vous ne voulez pas relire tout votre `PropMoverEx.inc` il faut d'appliquer cette operation sur votre `m_dropItems`.<br>
 
@@ -102,29 +102,75 @@ float too = (total * 100) / 3000000;
 LOOP pour chaque item dans m_dropItems.
     m_dropItems.dwProbability *= too;
 ```
-Et vous voila repasser sur 100 parts !
+Et vous voila repassé sur 100 parts !
 
-## Les chance de drops perturbe !
+## Les chance de drops perturbent !
+
+### Limite d'objets
+
+Dans `propMoverEtc.inc`, pour chaque monstre il faut donner le nombre d'objets maximums que l'on peut dropper sur le monstre.
+
+```
+MI_AIBATT1
+{
+	Maxitem = 2;
+	DropGold(6, 9);
+    DropItem(II_GEN_GEM_GEM_TWINKLESTONE, 300000000, 0, 1);
+
+}
+```
+
+Par exemple, on peut dropper au plus deux objets sur un Jeune Aibatt; il donne entre 6 et 9 gold et il a 100% de chances de dropper une Pierre Brillante. Ici comme il n'y a qu'un objet droppable, la limite ne peut pas être atteinte.
+
+Le paramètre Maxitem est utilisé ici :
+```cpp
+BOOL CMover::DropItem( CMover* pAttacker )
+{
+    // ...
+        if(  (DWORD)( nNumber ) >= lpMoverProp->m_DropItemGenerator.m_dwMax )
+            break;
+    // ...
+}
+```
+
+Supposons que l'on rajoute ces deux objets.
+
+```
+	DropItem(II_GEN_MAT_ORICHALCUM01, 3006250, 0, 1);
+	DropItem(II_GEN_MAT_MOONSTONE, 1560000, 0, 1);
+```
+La valeur `Maxitem = 2` signifie que si on a déjà droppé une Pierre Brillante et un Orichalque, le jeu s'arrête là et ne prend pas en compte le dernier objet (la Pierre brillante).
+
+
+### Impact des chances de drop
+
 
 Prenons par exemple les chance de drops suivant : <br>
+MaxItem = 1<br>
 BATON : 1500000000 => 50% <br>
 ARC   : 1500000000 => 50% <br>
 
-Si le joueur n'a pas de bonus alors aucun problème n'est a déplorer !<br>
+L'ARC a t'il vraiment 70% de chance d'être drop ?<br>
+Non parce que pour obtenir l'arc, il faut ne pas obtenir le bâton (50% de chances) puis obtenir l'arc (50% de chances) ce qui ne fait en réalité que 25% de chances d'obtenir l'arc.
+
+
 Maintenant ajoutons 20% de chance de drop !<br>
 ```cpp
 DWORD dwRand = xRandom(3000000000);
 dwRand = static_cast<DWORD>(dwRand / fProbability);
 ```
-Imaginons quand dans le premier cas nous aptenons `1500000000`, on ajout les 20% de drop => `1200000000`.<br>
-On peut considérer soit que nos score chance diminue (donc augment dans les fait) soit que notre item passe de 50% 70%.<br>
-Trouvez vous cela normal d'augmenter le poucentage de chance de drop d'un item sans prendre en compte les autres items de la liste ?<br>
+Imaginons quand dans le premier cas nous obtenons `1500000000`, on ajoute les 20% de drop => `1200000000`.<br>
+On peut considérer soit que notre score chance diminue (donc augment dans les fait) soit que notre item passe de 50% à 70%.<br>
 
-On pourrait ce dire que la liste des items passe donc en : <br>
-BATON : 1500000000 => 70% <br>
-ARC   : 1500000000 => 70% <br>
+On pourrait se dire que la liste des items passe donc en : <br>
+```
+BATON : 1500000000 => 70%
+ARC   : 1500000000 => 70%
+```
 
-ARC a t'il vraiment 70% de chance d'être drop ? Je dirais plutot 70% des 30% de fail du BATON !<br>
+Mais en réalité, les chances d'obtenir l'arc ont diminué : de 25% elles sont passées à 30% x 70% = 21% !<br>
 
-Pour résoudre cela il faut donc prendre en compte la liste complète des items !<br>
+
+Pour résoudre cela il faut donc prendre en compte la liste complète des items et la limite d'objets que l'on peut obtenir par monstre !<br>
+[Une solution courante est de mélangée la liste des drops](https://gist.github.com/SPSquonK/1bcfbd6cd861541a3e31a5cd09d1ae93). Néanmoins cette solution est peu satisfaisante car si elle rend équiprobable chaque objet ayant les mêmes chances, elle rend fausse les probabilités écrites dans le fichier `propMoverEtc.inc`.<br>
 A vos claviers ;)
