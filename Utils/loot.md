@@ -120,7 +120,7 @@ MI_AIBATT1
 }
 ```
 
-Par exemple, on peut dropper au plus deux objets sur un Jeune Aibatt; il donne entre 6 et 9 gold et il a 100% de chances de dropper une Pierre Brillante. Ici comme il n'y a qu'un objet droppable, la limite ne peut pas être atteinte.
+Par exemple, on peut dropper au plus deux objets sur un Jeune Aibatt, il donne entre 6 et 9 gold et il a 100% de chances de dropper une Pierre Brillante. Ici comme il n'y a qu'un objet droppable, la limite ne peut pas être atteinte.
 
 Le paramètre Maxitem est utilisé ici :
 ```cpp
@@ -139,7 +139,7 @@ Supposons que l'on rajoute ces deux objets.
 	DropItem(II_GEN_MAT_ORICHALCUM01, 3006250, 0, 1);
 	DropItem(II_GEN_MAT_MOONSTONE, 1560000, 0, 1);
 ```
-La valeur `Maxitem = 2` signifie que si on a déjà droppé une Pierre Brillante et un Orichalque, le jeu s'arrête là et ne prend pas en compte le dernier objet (la Pierre brillante).
+La valeur `Maxitem = 2` signifie que si on a déjà droppé une Pierre Brillante et un Orichalque, le jeu s'arrête là et ne prend pas en compte le dernier objet (la Pierre Lunaire).
 
 
 ### Impact des chances de drop
@@ -150,7 +150,7 @@ MaxItem = 1<br>
 BATON : 1500000000 => 50% <br>
 ARC   : 1500000000 => 50% <br>
 
-L'ARC a t'il vraiment 70% de chance d'être drop ?<br>
+L'ARC a t'il vraiment 50% de chance d'être drop ?<br>
 Non parce que pour obtenir l'arc, il faut ne pas obtenir le bâton (50% de chances) puis obtenir l'arc (50% de chances) ce qui ne fait en réalité que 25% de chances d'obtenir l'arc.
 
 
