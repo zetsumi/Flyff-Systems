@@ -1,4 +1,4 @@
-# Flyff est les logs !
+# Flyff et les logs !
 
 Il est coutume et même recommandé (voir obligatoire) d'écrire des logs pendant l'exécution d'un programe.<br>
 Mais comment bien les faire et les pièges éviter.<br>
@@ -13,7 +13,7 @@ Cela se distingue par les variables `g_szERROR` et `g_szEH`.<br>
 Leurs but étant de récupérer l'ensemble des paramètres représenté par `...` puis d'indiquer le type de log `LOG_DATE`.<br>
 Tandis que la fonction `Error` écrie un message de type `LOG_TYPE`.<br>
 
-___Type de LOG : ___
+***Type de LOG :***
 ```cpp
 enum LOG_TYPE
 {
@@ -22,7 +22,7 @@ enum LOG_TYPE
 };
 ```
 
-___WriteLog : ___
+***WriteLog :***
 ```cpp
 void WriteLog( LPCTSTR lpszFormat, ... )
 {
@@ -33,7 +33,7 @@ void WriteLog( LPCTSTR lpszFormat, ... )
 }
 ```
 
-___WriteError : ___
+***WriteError :***
 ```cpp
 void WriteError( LPCTSTR lpszFormat, ... )
 {
@@ -44,7 +44,7 @@ void WriteError( LPCTSTR lpszFormat, ... )
 }
 ```
 
-___Error : ___
+***Error :***
 ```cpp
 LPCTSTR Error(LPCTSTR strFormat, ...)
 {
