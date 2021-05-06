@@ -56,26 +56,37 @@ La version de c++ 17 pose les problèmes suivant :<br>
 * Suppression de`function objects` [std::unary_function](https://en.cppreference.com/w/cpp/utility/functional/unary_function) et [std::binary_function](https://en.cppreference.com/w/cpp/utility/functional/binary_function).<br>
 * Intégration de [std::byte](https://en.cppreference.com/w/cpp/types/byte#:~:text=std%3A%3Abyte%20is%20a,is%20not%20an%20arithmetic%20type.).<br>
 <br>
-Le code de FLyff de base utilise `BYTE` ==> `typedef unsigned char BYTE;` ainsi que `using namespace std;`. Afin de résoudre les déclaration ambigue entre `byte`et `BYTE` je recommande de supprimer toutes les références à `using namespace std;` vous allez devoir ajouter les `std::` devant tous les références aux objets/fonctions de la [stl](https://en.cppreference.com/w/).<br>
-Exemple `vector<int>` --> `std::vector<int>` c'est étape ne demande aucune connaissance particulière uniquement d'ajouter les préfixe `std::`.<br>
+
+Le code de Flyff de base utilise `BYTE` soit `typedef unsigned char BYTE;` ainsi que `using namespace std;`.<br>
+Afin de résoudre les déclarations ambigue entre `byte`et `BYTE` je recommande de supprimer toutes les références à `using namespace std;` vous allez devoir ajouter les `std::` devant tous les références aux objets/fonctions de la [stl](https://en.cppreference.com/w/).<br>
+Exemple `vector<int>` devient `std::vector<int>` cette étape ne demande aucune connaissance particulière uniquement d'ajouter les préfixe `std::`.<br>
 Pourquoi ne pas utilisé `using namespace` ? ==> [The Cherno : Why I don't "using namespace std"](https://www.youtube.com/watch?v=4NYC-VU-svE).<br>
 <br>
-Pour remplacer `std::unary_function` ou `std::binary_function` vous pouvez les remplacer par des lambda.<br>
+
+Pour remplacer `std::unary_function` ou `std::binary_function` vous pouvez les remplacer par des [lambda](https://en.cppreference.com/w/cpp/language/lambda).<br>
 Exemple :
 ```cpp
-struct IsSameID : public std::binary_function< GH_Fntr_Info, OBJID, bool >
+struct IsSameID : public std::binary_function< GH_Fntr_Info, OBJID, bool>
 {
-    bool operator( ) ( const GH_Fntr_Info& kInfo, OBJID id_ ) const 
+    bool operator()( const GH_Fntr_Info& kInfo, OBJID id_) const 
     {
-        return ( kInfo.objId == id_ );
+        return (kInfo.objId == id_);
     }
 };
 ```
 ```cpp
 VECFurnitureIter finder = find_if( m_vecFntInfo.begin(), m_vecFntInfo.end(), std::bind2nd( IsSameID(), objID_ ) );
 ```
-Supprimer `struct IsSameID` et remplace `IsSameID()` par :
+<br>
+
+Supprimer la structure `struct IsSameID`.
+Vous ne donc plus faire appelle à `IsSameID()` il faut donc ajouter le remplacer par une lambda :
 ```cpp
-   VECFurnitureIter finder = find_if(m_vecFntInfo.begin(), m_vecFntInfo.end(),
-        [objID_](const auto& it) {return it.objId == objID_});
+[objID_](const auto& it) { return it.objId == objID_; }
+```
+Ce qui devient donc :
+```cpp
+VECFurnitureIter finder = find_if(m_vecFntInfo.begin(), m_vecFntInfo.end(),
+        [objID_](const auto& it) { return it.objId == objID_; }
+    );
 ```
