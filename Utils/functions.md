@@ -53,8 +53,8 @@ Ajouter :
 ## CPP17
 Assurez-vous de compiler en C++14 avant !<br>
 La version de c++ 17 pose les problèmes suivant :<br>
-* Suppression de`function objects` [std::unary_function](https://en.cppreference.com/w/cpp/utility/functional/unary_function) et [std::binary_function](https://en.cppreference.com/w/cpp/utility/functional/binary_function).<br>
-* Intégration de [std::byte](https://en.cppreference.com/w/cpp/types/byte#:~:text=std%3A%3Abyte%20is%20a,is%20not%20an%20arithmetic%20type.).<br>
+* Suppression de`function objects` [std::unary_function](https://en.cppreference.com/w/cpp/utility/functional/unary_function) et [std::binary_function](https://en.cppreference.com/w/cpp/utility/functional/binary_function).
+* Intégration de [std::byte](https://en.cppreference.com/w/cpp/types/byte#:~:text=std%3A%3Abyte%20is%20a,is%20not%20an%20arithmetic%20type.).
 <br>
 
 Le code de Flyff de base utilise `BYTE` soit `typedef unsigned char BYTE;` ainsi que `using namespace std;`.<br>
